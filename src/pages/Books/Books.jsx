@@ -1,8 +1,15 @@
 import React from 'react'
+import Book from '../Book/Book'
 
-const Books = () => {
+const Books = ({data}) => {
+
   return (
-    <div>Books</div>
+    <div>
+      <h1>Books</h1>
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20'>
+      {data.map((singleBook)=> <Book singleBook = {singleBook}></Book>)}
+    </div>
+    </div>
   )
 }
 
