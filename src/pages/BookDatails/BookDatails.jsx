@@ -1,19 +1,27 @@
 import React, { useState } from 'react'
 import { useLoaderData, useParams } from 'react-router'
 import { CiStar } from "react-icons/ci";
+import { addItem, getItem } from '../../storeDB/localStoreDB';
 
 const BookDatails = () => {
     const data = useLoaderData();
     const { id } = useParams();
     const bookData = data.find((b) => b.bookId == id);
+    console.log(Array.isArray(data))
+    console.log(getItem())
     const { bookId, bookName, image, author, review, rating, pages, category, publisher, tags, totalPages, yearOfPublishing } = bookData;
+    const [disableBtn , setDisableBtn] = useState(getItem().includes(bookId))
+    const handelRead =()=> {
+        setDisableBtn(true)
+        addItem (bookId)
+    }
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row">
-                <div className='bg-taupe-300  py-6 w-5/12 rounded-2xl max-h-svh relative flex justify-center items-center'>
+                <div className='bg-taupe-300 overflow-hidden  py-6 w-5/12 rounded-2xl max-h-svh relative flex justify-center items-center'>
                     <img
                         src={image}
-                        className=" h-130 rounded-lg shadow-2xl"
+                        className=" rounded-lg object-cover h-130 shadow-2xl"
                     />
                 </div>
                 <div className='flex flex-col justify-between max-h-svh relative w-7/12 '>
@@ -48,7 +56,9 @@ const BookDatails = () => {
                         </div>
                     </div>
                     <div className='flex gap-3'>
-                        <button className="btn btn-primary">Read</button>
+                        <button className="btn btn-primary" 
+                        disabled = {disableBtn}
+                        onClick={handelRead}>Read</button>
                         <button className="btn btn-primary">Wishlist</button>
                     </div>
                 </div>

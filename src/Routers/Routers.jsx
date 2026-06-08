@@ -4,6 +4,8 @@ import Root from '../Root/Root'
 import Home from '../pages/Home/Home'
 import Books from '../pages/Books/Books'
 import BookDatails from '../pages/BookDatails/BookDatails'
+import Listed from '../pages/Listed'
+import PageToread from '../pages/PageToRead/PageToread'
 
 const Routers = createBrowserRouter([
     {
@@ -13,7 +15,7 @@ const Routers = createBrowserRouter([
             {
                 index: true,
                 path: '/',
-                loader: () => fetch('./books.json'),
+                loader: () => fetch('../books.json'),
                 Component: Home
             },
             {
@@ -24,6 +26,16 @@ const Routers = createBrowserRouter([
                 path: 'bookDatails/:id' ,
                 loader : ()=> fetch ('../books.json'),
                 Component : BookDatails
+            } , 
+            {
+                path : "listed",
+                loader: () => fetch('../books.json'),
+                Component : Listed 
+            } , 
+            {
+                path : 'pageRead',
+                loader: () => fetch('../books.json'),
+                Component : PageToread
             }
 
 
