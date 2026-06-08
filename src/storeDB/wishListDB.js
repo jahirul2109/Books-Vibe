@@ -1,5 +1,5 @@
-const getItem = () => {
-    const storedData = localStorage.getItem('readlist');
+const getItemWish = () => {
+    const storedData = localStorage.getItem('wishList');
 
     if (!storedData) {
         return [];
@@ -8,8 +8,8 @@ const getItem = () => {
     return JSON.parse(storedData);
 }
 
-const addItem = (id) => {
-    const getData = getItem();
+const addItemWish = (id) => {
+    const getData = getItemWish();
     const exist = getData.find(bookId => bookId === id);
     if (!exist || exist === undefined) {
         const remaningId = [...getData, id];
@@ -18,12 +18,12 @@ const addItem = (id) => {
         console.log("This is already exsit");
     }
 }
-const removDB = (id)=>{
-    const getId = getItem();
+const removDBWish = (id)=>{
+    const getId = getItemWish();
     const reamingId = getId.filter(singleId=> singleId !== id);
     setId(reamingId)
 }
 const setId =(data)=> {
-    const set = localStorage.setItem('readlist', JSON.stringify(data))
+    const set = localStorage.setItem('wishList', JSON.stringify(data))
 }
-export{getItem , addItem , removDB }
+export{getItemWish  , addItemWish , removDBWish }

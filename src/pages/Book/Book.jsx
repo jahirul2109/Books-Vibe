@@ -6,7 +6,7 @@ const Book = ({ singleBook }) => {
     const { bookId, bookName, image, author, review, rating, pages, category, publisher, tags, totalPages, yearOfPublishing } = singleBook
     return (
         <Link to={`/bookDatails/${bookId}`}>
-            <div className=" bg-base-100 flex flex-col h-full card   w-96 shadow-sm">
+            <div className=" bg-base-100 flex flex-col h-full card   shadow-sm">
                 <figure className='bg-gray-400 border border-gray-900 py-8'>
                     <img
                         className='h-50'

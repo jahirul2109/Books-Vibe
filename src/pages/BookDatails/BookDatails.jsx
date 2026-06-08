@@ -2,21 +2,26 @@ import React, { useState } from 'react'
 import { useLoaderData, useParams } from 'react-router'
 import { CiStar } from "react-icons/ci";
 import { addItem, getItem } from '../../storeDB/localStoreDB';
+import { addItemWish, getItemWish } from '../../storeDB/wishListDB';
 
 const BookDatails = () => {
     const data = useLoaderData();
     const { id } = useParams();
     const bookData = data.find((b) => b.bookId == id);
-    console.log(Array.isArray(data))
-    console.log(getItem())
     const { bookId, bookName, image, author, review, rating, pages, category, publisher, tags, totalPages, yearOfPublishing } = bookData;
-    const [disableBtn , setDisableBtn] = useState(getItem().includes(bookId))
-    const handelRead =()=> {
+    const [disableBtn, setDisableBtn] = useState(getItem().includes(bookId));
+    const [disableWish, setDisableWish] = useState(getItemWish().includes(bookId));
+    const handelRead = () => {
         setDisableBtn(true)
-        addItem (bookId)
+        addItem(bookId)
+    }
+    const handleWishList = () => {
+        addItemWish(bookId)
+        setDisableWish(true)
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
+            <title>{bookName}</title>
             <div className="hero-content flex-col lg:flex-row">
                 <div className='bg-taupe-300 overflow-hidden  py-6 w-5/12 rounded-2xl max-h-svh relative flex justify-center items-center'>
                     <img
@@ -56,10 +61,12 @@ const BookDatails = () => {
                         </div>
                     </div>
                     <div className='flex gap-3'>
-                        <button className="btn btn-primary" 
-                        disabled = {disableBtn}
-                        onClick={handelRead}>Read</button>
-                        <button className="btn btn-primary">Wishlist</button>
+                        <button className="btn btn-primary"
+                            disabled={disableBtn}
+                            onClick={handelRead}>Read</button>
+                        <button className="btn btn-primary"
+                            disabled={disableWish}
+                            onClick={handleWishList}>Wishlist</button>
                     </div>
                 </div>
             </div>

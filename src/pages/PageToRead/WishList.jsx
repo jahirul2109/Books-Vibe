@@ -1,7 +1,6 @@
 import React from 'react'
-import { getItem, removDB } from '../storeDB/localStoreDB';
 
-const ListedBooks = ({ cart, book, handelUnread }) => {
+const WishList = ({book , handleRemoveWish}) => {
     const { bookId, bookName, image, author, review, rating, pages, category, publisher, tags, totalPages, yearOfPublishing } = book;
     return (
         <div className="hero bg-base-200 h-fit relative">
@@ -17,13 +16,12 @@ const ListedBooks = ({ cart, book, handelUnread }) => {
                         quasi. In deleniti eaque aut repudiandae et a id nisi.
                     </p>
                     <div>
-                        <button className="btn btn-primary" onClick={() => { handelUnread(bookId) }}>Unread</button>
+                        <button className="btn btn-primary" onClick={()=> {handleRemoveWish(bookId)}} >Remove wishlist</button>
                     </div>
                 </div>
             </div>
         </div>
-
     )
 }
 
-export default ListedBooks
+export default WishList
