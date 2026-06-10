@@ -20,7 +20,7 @@ const BookDatails = () => {
         setDisableWish(true)
     }
     return (
-        <div className="hero bg-base-200 min-h-screen">
+        <div className="hero bg-base-200 min-h-screen flex-1">
             <title>{bookName}</title>
             <div className="hero-content flex-col lg:flex-row">
                 <div className='bg-taupe-300 overflow-hidden  py-6 w-5/12 rounded-2xl max-h-svh relative flex justify-center items-center'>

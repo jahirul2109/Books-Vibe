@@ -1,6 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router'
 
+const links = <>
+  <li><NavLink className={({isActive})=> isActive ? "bg-green-600 text-white duration-300" : ""} to="/">Home</NavLink></li>
+  <li><NavLink className={({isActive})=> isActive ? "bg-green-600 text-white duration-300" : ""} to="/listed">Listed book</NavLink></li>
+  <li><NavLink className={({isActive})=> isActive ? "bg-green-600 text-white duration-300" : ""} to="/pageRead">Page to Read</NavLink></li>
+</>
+
 const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -14,9 +20,7 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
             <li>
               <ul className="p-2">
-                <li><NavLink to="/">Home</NavLink></li>
-                <li><NavLink to="/listed">Listed book</NavLink></li>
-                <li><NavLink to="/pageRead">Page to Read</NavLink></li>
+                {links}
               </ul>
             </li>
           </ul>
@@ -25,13 +29,13 @@ const Navbar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li><NavLink to="/">Home</NavLink></li>
-          <li><NavLink to="/listed">Listed book</NavLink></li>
-          <li><NavLink to="/pageRead">Page to Read</NavLink></li>
+      {
+        links
+      }
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <NavLink to='/login'><button>Login</button></NavLink>
       </div>
     </div>
   )

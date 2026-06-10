@@ -6,8 +6,8 @@ import { getItemWish, removDBWish } from '../storeDB/wishListDB';
 import WishList from './PageToRead/WishList';
 
 const Listed = () => {
-    const [show ,setShow] = useState(true)
-    const [wish , setWish]= useState([])
+    const [show, setShow] = useState(true)
+    const [wish, setWish] = useState([])
     const [cart, setCart] = useState([])
     const loadData = useLoaderData();
     const getId = getItem();
@@ -17,8 +17,8 @@ const Listed = () => {
         setCart(readlist)
     }, [])
 
-    useEffect(()=> {
-        const wishList = loadData.filter(book=> getWishList.includes(book.bookId));
+    useEffect(() => {
+        const wishList = loadData.filter(book => getWishList.includes(book.bookId));
         setWish(wishList);
     }, [])
 
@@ -28,22 +28,22 @@ const Listed = () => {
         setCart(remning);
         removDB(id)
     }
-    const handleRemoveWish = (id)=> {
-        const remaning = wish.filter(book=> book.bookId !== id);
+    const handleRemoveWish = (id) => {
+        const remaning = wish.filter(book => book.bookId !== id);
         setWish(remaning);
         removDBWish(id)
     }
     return (
-        <div>
+        <div className='w-11/12 mx-auto flex-1 min-h-screen'>
             <title>HOME || Listed</title>
 
             <div className='bg-amber-400 flex justify-center items-center'>
-                <button className={`btn ${show ? "btn-active bg-green-500" : ""}`} onClick={()=> {setShow(true)}}>Read list ({cart.length})</button>
-                <button className={`btn ${show ? "" : "btn-active bg-green-500"}`} onClick={()=> {setShow(false)}}>Wish list({wish.length})</button>
+                <button className={`btn ${show ? "btn-active bg-green-500" : ""}`} onClick={() => { setShow(true) }}>Read list ({cart.length})</button>
+                <button className={`btn ${show ? "" : "btn-active bg-green-500"}`} onClick={() => { setShow(false) }}>Wish list({wish.length})</button>
             </div>
-            
+
             <div className='grid grid-cols-1 gap-4'>
-                {show ? cart.map(book => <ListedBooks key={book.bookId} cart = {cart} handelUnread={handelUnread} book={book}></ListedBooks>) : wish.map(book=> <WishList key={book.bookId} book = {book} handleRemoveWish = {handleRemoveWish}></WishList>) }
+                {show ? cart.map(book => <ListedBooks key={book.bookId} cart={cart} handelUnread={handelUnread} book={book}></ListedBooks>) : wish.map(book => <WishList key={book.bookId} book={book} handleRemoveWish={handleRemoveWish}></WishList>)}
             </div>
         </div>
     )

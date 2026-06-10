@@ -7,7 +7,7 @@ const Home = () => {
   const data = useLoaderData();
   console.log(data)
   return (
-    <div className=''>
+    <div className='w-11/12 flex-1'>
       <title>HOME</title>
       <Banner data = {data}></Banner>
       <Books data = {data}></Books>

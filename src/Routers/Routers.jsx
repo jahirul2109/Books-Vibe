@@ -6,6 +6,7 @@ import Books from '../pages/Books/Books'
 import BookDatails from '../pages/BookDatails/BookDatails'
 import Listed from '../pages/Listed'
 import PageToread from '../pages/PageToRead/PageToread'
+import Login from '../compontes/Header/Login'
 
 const Routers = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ const Routers = createBrowserRouter([
                 path : 'pageRead',
                 loader: () => fetch('../books.json'),
                 Component : PageToread
+            },
+            {
+                path : '/login',
+                Component : Login 
             }
 
 

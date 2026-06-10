@@ -4,7 +4,7 @@ import { getItem, removDB } from '../storeDB/localStoreDB';
 const ListedBooks = ({ cart, book, handelUnread }) => {
     const { bookId, bookName, image, author, review, rating, pages, category, publisher, tags, totalPages, yearOfPublishing } = book;
     return (
-        <div className="hero bg-base-200 h-fit relative">
+        <div className="hero bg-base-200  h-fit relative">
             <div className="hero-content  flex-col-reverse lg:flex-row-reverse ">
                 <img
                     src={image}

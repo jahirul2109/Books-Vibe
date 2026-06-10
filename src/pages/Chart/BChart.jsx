@@ -23,7 +23,7 @@ const BChart = ({ pageData }) => {
 
   console.log(pageData)
   return (
-    <div>
+    <div className='flex-1'>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={pageData}  height={300}>
           <XAxis dataKey= 'shortName' interval={0} ></XAxis>
