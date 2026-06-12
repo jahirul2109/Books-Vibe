@@ -35,7 +35,8 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <NavLink to='/login'><button>Login</button></NavLink>
+        <NavLink to='/login' className={({isActive})=> isActive ? "bg-green-600 btn text-white duration-300" : "btn"}><button>Login</button></NavLink>
+        <NavLink to='/registation' className={({isActive})=> isActive ? "bg-green-600 btn text-white duration-300" : "btn"}><button>Registation</button></NavLink>
       </div>
     </div>
   )

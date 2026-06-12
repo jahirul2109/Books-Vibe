@@ -7,6 +7,7 @@ import BookDatails from '../pages/BookDatails/BookDatails'
 import Listed from '../pages/Listed'
 import PageToread from '../pages/PageToRead/PageToread'
 import Login from '../compontes/Header/Login'
+import Registation from '../compontes/Header/Registation'
 
 const Routers = createBrowserRouter([
     {
@@ -41,8 +42,11 @@ const Routers = createBrowserRouter([
             {
                 path : '/login',
                 Component : Login 
+            },
+            {
+                path : '/registation',
+                Component : Registation 
             }
-
 
         ]
     }

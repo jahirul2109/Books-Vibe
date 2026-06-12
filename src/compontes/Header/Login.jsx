@@ -1,6 +1,7 @@
-import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import React, { useState } from 'react'
 import auth from '../../firebase/firebase.auth';
+import { NavLink } from 'react-router';
 
 const Login = () => {
     const [user, setUser] = useState(null)
@@ -24,7 +25,7 @@ const Login = () => {
         e.preventDefault()
         const email = e.target.email.value;
         const pass = e.target.pass.value;
-        createUserWithEmailAndPassword(auth , email , pass)
+        signInWithEmailAndPassword(auth , email , pass)
         .then(result => setUser(result))
         .catch(error => console.log(error))
         console.log(email)
@@ -51,7 +52,8 @@ const Login = () => {
                                 <input type="email" className="input" name='email' placeholder="Email" />
                                 <label className="label">Password</label>
                                 <input type="password" className="input" name='pass' placeholder="Password" />
-                                <button className="btn btn-neutral mt-4">Regesition</button>
+                                <button className="btn btn-neutral mt-4">Login</button>
+                                <p>Don't Have Account ?? <NavLink to= '/registation' className='text-blue-600 underline'>Sign Up</NavLink> </p>
                             </fieldset>
                         </form>
                     </div>
