@@ -1,10 +1,13 @@
 import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
-import React, { useState } from 'react'
+import React, { use, useState } from 'react'
 import auth from '../../firebase/firebase.auth';
 import { NavLink } from 'react-router';
+import { AuthCon } from '../../Context/AuthContex/AuthCon';
 
 const Login = () => {
-    const [user, setUser] = useState(null)
+    const {signIn} = use(AuthCon);    
+    const {user} = use(AuthCon);
+    const [currentUser, setUser] = useState(null)
     const handelGoogleLogin = () => {
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
@@ -21,16 +24,27 @@ const Login = () => {
             .then(result => setUser(result))
             .catch(error => console.log(error))
     }
-    const handelEmailPassLogin = (e) => {
+
+    const handelEmailPassLogin = (e)=> {
         e.preventDefault()
-        const email = e.target.email.value;
-        const pass = e.target.pass.value;
-        signInWithEmailAndPassword(auth , email , pass)
-        .then(result => setUser(result))
-        .catch(error => console.log(error))
-        console.log(email)
-    }   
-    console.log(user)
+        const email = e.target.email.value ;
+        const pass = e.target.pass.value ;
+        signIn(email , pass)
+        .then(result => {
+            console.log(result)
+            setUser(result)
+        })
+        .catch(err => console.log(err))
+    }
+    // const handelEmailPassLogin = (e) => {
+    //     e.preventDefault()
+    //     const email = e.target.email.value;
+    //     const pass = e.target.pass.value;
+    //     signInWithEmailAndPassword(auth , email , pass)
+    //     .then(result => setUser(result))
+    //     .catch(error => console.log(error))
+    //     console.log(email)
+    // }   
     return (
         <div className='flex-1 min-h-screen'>
             <div>
@@ -38,9 +52,9 @@ const Login = () => {
                 <button className='btn' onClick={handelGithubLogin}>Singup Github</button>
                 <div>
                     <h1>
-                        {user?.user.displayName}
+                        {currentUser?.user.displayName}
                     </h1>
-                    <p>{user?.user.email}</p>
+                    <p>{currentUser?.user.email}</p>
                 </div>
             </div>
             <div>

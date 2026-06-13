@@ -1,13 +1,28 @@
-import React from 'react'
+import React, { use } from 'react'
 import { NavLink } from 'react-router'
+import { AuthCon } from '../../Context/AuthContex/AuthCon'
+import { signOut } from 'firebase/auth';
+import auth from '../../firebase/firebase.auth';
 
-const links = <>
+
+
+const Navbar = () => {
+  const {user} = use(AuthCon);
+  const handelLogout = ()=> {
+    if (!user) {
+      console.log('user nai')
+      return ;
+    }
+      signOut(auth)
+      .then(()=> console.log("logout Successfully"))
+      .catch((err => console.log(err)))
+  }
+  const links = <>
   <li><NavLink className={({isActive})=> isActive ? "bg-green-600 text-white duration-300" : ""} to="/">Home</NavLink></li>
   <li><NavLink className={({isActive})=> isActive ? "bg-green-600 text-white duration-300" : ""} to="/listed">Listed book</NavLink></li>
   <li><NavLink className={({isActive})=> isActive ? "bg-green-600 text-white duration-300" : ""} to="/pageRead">Page to Read</NavLink></li>
 </>
-
-const Navbar = () => {
+  console.log(user)
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -25,7 +40,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl">{user?.email}</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -35,7 +50,9 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <NavLink to='/login' className={({isActive})=> isActive ? "bg-green-600 btn text-white duration-300" : "btn"}><button>Login</button></NavLink>
+        <NavLink to='/login' className={({isActive})=> isActive ? "bg-green-600 btn text-white duration-300" : "btn"}><button onClick={()=>{
+        handelLogout()
+        }}>{user ? "Logout" : "Login" }</button></NavLink>
         <NavLink to='/registation' className={({isActive})=> isActive ? "bg-green-600 btn text-white duration-300" : "btn"}><button>Registation</button></NavLink>
       </div>
     </div>

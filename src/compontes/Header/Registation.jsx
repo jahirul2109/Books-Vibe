@@ -1,29 +1,44 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import React, { useState } from 'react'
+import React, { use, useContext, useState } from 'react'
 import { NavLink } from 'react-router';
 import auth from '../../firebase/firebase.auth';
+import { AuthCon } from '../../Context/AuthContex/AuthCon';
 
 const Registation = () => {
+    const {createUser} = use(AuthCon);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false)
-    const handelEmailPassLogin = (e) => {
-        e.preventDefault()
-        const email = e.target.email.value;
-        const pass = e.target.pass.value;
-        const Name = e.target.userName.value;
-        const url = e.target.photo.value;
-        setError('')
-        setSuccess(false)
-        createUserWithEmailAndPassword(auth, email, pass)
-            .then(result => {
-                result.user.displayName = Name ;
-                result.user.photoURL = url ;
-                console.log(result)
-                setSuccess(true)
-                e.target.reset()
-            })
-            .catch(error => setError(error.message))
+    const handelEmailPassLogin = (event)=> {
+        event.preventDefault();
+        const email = event.target.email.value ;
+        const name = event.target.userName.value;
+        const password = event.target.pass.value ;
+        createUser(email , password)
+        .then(result => {
+            console.log(result)
+            event.target.reset()
+            setSuccess(true)
+        })
+        .catch(err => console.log(err))
     }
+    // const handelEmailPassLogin = (e) => {
+    //     e.preventDefault()
+    //     const email = e.target.email.value;
+    //     const pass = e.target.pass.value;
+    //     const Name = e.target.userName.value;
+    //     const url = e.target.photo.value;
+    //     setError('')
+    //     setSuccess(false)
+    //     createUserWithEmailAndPassword(auth, email, pass)
+    //         .then(result => {
+    //             result.user.displayName = Name ;
+    //             result.user.photoURL = url ;
+    //             console.log(result)
+    //             setSuccess(true)
+    //             e.target.reset()
+    //         })
+    //         .catch(error => setError(error.message))
+    // }
     return (
         <div className='flex-1 min-h-screen'>
             <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">

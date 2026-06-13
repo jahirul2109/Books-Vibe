@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
-import { useLoaderData, useParams } from 'react-router'
+import React, { use, useState } from 'react'
+import { Navigate, useLoaderData, useParams ,  } from 'react-router'
 import { CiStar } from "react-icons/ci";
 import { addItem, getItem } from '../../storeDB/localStoreDB';
 import { addItemWish, getItemWish } from '../../storeDB/wishListDB';
+import { AuthCon } from '../../Context/AuthContex/AuthCon';
 
 const BookDatails = () => {
+    const { user } = use(AuthCon)
     const data = useLoaderData();
     const { id } = useParams();
     const bookData = data.find((b) => b.bookId == id);
@@ -20,7 +22,8 @@ const BookDatails = () => {
         setDisableWish(true)
     }
     return (
-        <div className="hero bg-base-200 min-h-screen flex-1">
+        <div>
+            {user ?         <div className="hero bg-base-200 min-h-screen flex-1">
             <title>{bookName}</title>
             <div className="hero-content flex-col lg:flex-row">
                 <div className='bg-taupe-300 overflow-hidden  py-6 w-5/12 rounded-2xl max-h-svh relative flex justify-center items-center'>
@@ -70,6 +73,7 @@ const BookDatails = () => {
                     </div>
                 </div>
             </div>
+        </div> : <Navigate to= '/login'></Navigate>}
         </div>
     )
 }
